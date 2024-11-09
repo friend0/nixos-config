@@ -53,6 +53,7 @@ with pkgs; [
   tmux
   unrar
   unzip
+  vimPlugins.LazyVim
   zsh-powerlevel10k
 
   # Python packages
