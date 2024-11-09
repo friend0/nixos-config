@@ -10,7 +10,7 @@ with pkgs; [
   coreutils
   direnv
   killall
-  kitty
+  # kitty
   neofetch
   openssh
   sqlite

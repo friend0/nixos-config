@@ -5,8 +5,16 @@ let
   # Define the content of your file as a derivation
   sharedFiles = import ../shared/files.nix { inherit config pkgs; };
   additionalFiles = import ./files.nix { inherit user config pkgs; };
+  installRosetta = pkgs.writeShellScriptBin "install-rosetta" ''
+    if [[ $(uname -m) == "arm64" && ! $(pgrep oahd) ]]; then
+      echo "Installing Rosetta 2..."
+      sudo softwareupdate --install-rosetta --agree-to-license
+    fi
+  '';
 in
 {
+  packages = [ installRosetta ];
+
   imports = [
    ./dock
   ];
@@ -17,6 +25,11 @@ in
     home = "/Users/${user}";
     isHidden = false;
     shell = pkgs.zsh;
+  };
+
+  home.activation.installRosetta = {
+    # Run the Rosetta install script on activation.
+    run = "${installRosetta}/bin/install-rosetta";
   };
 
   homebrew = {

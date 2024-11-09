@@ -4,6 +4,8 @@ _:
   # Development Tools
   "homebrew/cask/docker"
   "visual-studio-code"
+  "kitty"
+
 
   # Communication Tools
   "discord"
