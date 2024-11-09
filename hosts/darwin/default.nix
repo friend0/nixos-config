@@ -33,7 +33,8 @@ let user = "m0"; in
   system.checks.verifyNixPath = false;
 
   environment.systemPackages = with pkgs; [
-    pkgs.vimPlugins.LazyVim 
+    pkgs.vimPlugins.LazyVim,
+    pkgs.kitty 
   ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
   system = {
