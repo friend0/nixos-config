@@ -34,7 +34,7 @@ let user = "m0"; in
 
   environment.systemPackages = with pkgs; [
     pkgs.vimPlugins.LazyVim
-    pkgs.kitty 
+    kitty 
   ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
   system = {
