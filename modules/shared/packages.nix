@@ -48,6 +48,7 @@ with pkgs; [
   iftop
   jetbrains-mono
   jq
+  neovim
   ripgrep
   tree
   tmux

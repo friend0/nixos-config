@@ -188,7 +188,13 @@ let name = "Ryan Rodriguez";
 
   kitty = {
     enable = true;
-    settings = { };
+    settings = {
+    };
+    font = {
+      name = "jetbrains-mono";
+      size = 14;
+    };
+    # opacity = "0.9";
   };
 
   ssh = {

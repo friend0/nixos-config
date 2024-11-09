@@ -67,7 +67,7 @@ in
     { path = "/Applications/Slack.app/"; }
     { path = "/System/Applications/Messages.app/"; }
     { path = "/System/Applications/Facetime.app/"; }
-    { path = "${pkgs.kitty}/Applications/kitty.app/"; }
+    { path = "/Applications/Kitty.app/"; }
     {
       path = "${config.users.users.${user}.home}/.local/share/";
       section = "others";
