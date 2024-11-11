@@ -10,7 +10,7 @@ with pkgs; [
   coreutils
   direnv
   killall
-  # kitty
+  lazygit
   neofetch
   openssh
   sqlite
@@ -43,6 +43,7 @@ with pkgs; [
   nodejs
 
   # Text and terminal utilities
+  fzf
   htop
   hunspell
   iftop
@@ -60,4 +61,8 @@ with pkgs; [
   # Python packages
   python312
   python312Packages.virtualenv # globally install virtualenv
+  
+  # Go
+  go
+  gopls
 ]
