@@ -5,6 +5,7 @@ _:
   "homebrew/cask/docker"
   "visual-studio-code"
   "kitty"
+  "wezterm"
 
 
   # Communication Tools
@@ -14,6 +15,9 @@ _:
 
   # Utility Tools
   "syncthing"
+  "rectangle"
+  "logi-options+"
+  "chatgpt"
 
   # Entertainment Tools
   "vlc"
