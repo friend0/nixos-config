@@ -2,7 +2,20 @@
 
 let name = "Ryan Rodriguez";
     user = "m0";
-    email = "ryan.and.rodriguez@gmail.com"; in
+    email = "ryan.and.rodriguez@gmail.com";
+
+  tpm = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tpm";
+    version = "3.1.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "tmux-plugins";
+      repo = "tpm";
+      rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
+      sha256 = "sha256-hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+    };
+  };
+
+in
 {
   # Shared shell configuration
   zsh = {
@@ -225,34 +238,110 @@ let name = "Ryan Rodriguez";
     enable = true;
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
-      catppuccin
       sensible
       yank
       prefix-highlight
-      cpu
-      battery
+      tpm
       # {
-      #   plugin = resurrect; # Used by tmux-continuum
+      #   plugin = power-theme;
+      #   extraConfig = ''
+      #     set -g @tmux_power_theme 'catppuccin'
+      #   '';
+      # }
+      {
+        plugin = resurrect; # Used by tmux-continuum
 
-      #   # Use XDG data directory
-      #   # https://github.com/tmux-plugins/tmux-resurrect/issues/348
-      #   extraConfig = ''
-      #     set -g @resurrect-dir '$HOME/.cache/tmux/resurrect'
-      #     set -g @resurrect-capture-pane-contents 'on'
-      #     set -g @resurrect-pane-contents-area 'visible'
-      #   '';
-      # }
-      # {
-      #   plugin = continuum;
-      #   extraConfig = ''
-      #     set -g @continuum-restore 'on'
-      #     set -g @continuum-save-interval '5' # minutes
-      #   '';
-      # }
+        # Use XDG data directory
+        # https://github.com/tmux-plugins/tmux-resurrect/issues/348
+        extraConfig = ''
+          set -g @resurrect-dir '/Users/dustin/.cache/tmux/resurrect'
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-pane-contents-area 'visible'
+        '';
+      }
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '5' # minutes
+        '';
+      }
     ];
     terminal = "screen-256color";
-    prefix = "C-x";
+    prefix = "C-space";
     escapeTime = 10;
     historyLimit = 50000;
+    extraConfig = ''
+      # Default shell
+      set -gu default-command
+      set -g default-shell "$SHELL"
+      set -g @plugin 'tmux-plugins/tpm'
+
+      # Remove Vim mode delays
+      set -g focus-events on
+
+      # Enable full mouse support
+      set -g mouse on
+
+      # -----------------------------------------------------------------------------
+      # Key bindings
+      # -----------------------------------------------------------------------------
+
+      # Unbind default keys
+      unbind C-b
+      unbind '"'
+      unbind %
+
+      set -g base-index 1           # start windows numbering at 1
+      setw -g pane-base-index 1     # make pane numbering consistent with windows
+
+      # Split panes, vertical or horizontal
+      bind-key x split-window -v
+      bind-key v split-window -h
+
+      # Move around panes with vim-like bindings (h,j,k,l)
+      bind -r h select-pane -L  # move left
+      bind -r j select-pane -D  # move down
+      bind -r k select-pane -U  # move up
+      bind -r l select-pane -R  # move right
+      bind > swap-pane -D       # swap current pane with the next one
+      bind < swap-pane -U       # swap current pane with the previous one
+
+      # pane resizing
+      bind -r H resize-pane -L 2
+      bind -r J resize-pane -D 2
+      bind -r K resize-pane -U 2
+      bind -r L resize-pane -R 2
+
+      # window navigation
+      unbind n
+      unbind p
+      bind -r C-h previous-window # select previous window
+      bind -r C-l next-window     # select next window
+      bind Tab last-window        # move to last active window
+
+      # Smart pane switching with awareness of Vim splits.
+      # This is copy paste from https://github.com/christoomey/vim-tmux-navigator
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+        | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
+      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
+      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
+      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
+      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
+        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
+      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
+        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
+
+      bind-key -T copy-mode-vi 'C-h' select-pane -L
+      bind-key -T copy-mode-vi 'C-j' select-pane -D
+      bind-key -T copy-mode-vi 'C-k' select-pane -U
+      bind-key -T copy-mode-vi 'C-l' select-pane -R
+      bind-key -T copy-mode-vi 'C-\' select-pane -l
+
+      run-shell "~/.config/tmux/plugins/tmux-powerline/main.tmux"
+      '';
   };
+
 }

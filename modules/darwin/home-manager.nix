@@ -43,6 +43,7 @@ in
   # Enable home-manager
   home-manager = {
     useGlobalPkgs = true;
+    backupFileExtension = "bk";
     users.${user} = { pkgs, config, lib, ... }:{
       home = {
         enableNixpkgsReleaseCheck = false;
@@ -53,7 +54,7 @@ in
         ];
       activation.setPermissions = lib.mkAfter ''
           echo "Setting custom permissions on files in lzvim"
-          chmod -R 0777 .config/lzvim # Set directory permissions
+          chmod -R 0766 .config/lzvim # Set directory permissions
         '';
         stateVersion = "23.11";
       };
