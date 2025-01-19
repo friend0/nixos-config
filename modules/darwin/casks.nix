@@ -17,7 +17,9 @@ _:
   "syncthing"
   "rectangle"
   "logi-options+"
+  "coolterm"
   "chatgpt"
+  "karabiner-elements"
 
   # Entertainment Tools
   "vlc"

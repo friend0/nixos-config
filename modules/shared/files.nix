@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
     kitty = builtins.path { path = ./config/kitty; };
-    lzvim = builtins.path { path = ./config/lzvim; };
+    # lzvim = builtins.path { path = ./config/lzvim; };
     tmux = builtins.path { path = ./config/tmux; };
     tmux-powerline = builtins.path { path = ./config/tmux-powerline; };
 in
@@ -12,11 +12,11 @@ in
     recursive = true;
   };
 
-  ".config/lzvim" = {
-    source = lzvim;
-    target = ".config/lzvim";
-    recursive = true;
-  };
+  # ".config/lzvim" = {
+  #   source = lzvim;
+  #   target = ".config/lzvim";
+  #   recursive = true;
+  # };
 
   ".config/tmux" = {
     source = tmux;

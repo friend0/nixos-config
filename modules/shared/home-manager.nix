@@ -242,12 +242,6 @@ in
       yank
       prefix-highlight
       tpm
-      # {
-      #   plugin = power-theme;
-      #   extraConfig = ''
-      #     set -g @tmux_power_theme 'catppuccin'
-      #   '';
-      # }
       {
         plugin = resurrect; # Used by tmux-continuum
 
@@ -295,10 +289,6 @@ in
       set -g base-index 1           # start windows numbering at 1
       setw -g pane-base-index 1     # make pane numbering consistent with windows
 
-      # Split panes, vertical or horizontal
-      bind-key x split-window -v
-      bind-key v split-window -h
-
       # Move around panes with vim-like bindings (h,j,k,l)
       bind -r h select-pane -L  # move left
       bind -r j select-pane -D  # move down
@@ -312,6 +302,10 @@ in
       bind -r J resize-pane -D 2
       bind -r K resize-pane -U 2
       bind -r L resize-pane -R 2
+
+      # pane management
+      bind x confirm-before "kill-pane"
+      bind X confirm-before "kill-window"
 
       # window navigation
       unbind n

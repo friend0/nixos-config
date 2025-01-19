@@ -51,6 +51,7 @@ with pkgs; [
   jq
   neovim
   ripgrep
+  starship
   tree
   tmux
   unrar

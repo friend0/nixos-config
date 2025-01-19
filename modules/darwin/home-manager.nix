@@ -69,7 +69,7 @@ in
   # Fully declarative dock using the latest from Nix Store
   local.dock.enable = true;
   local.dock.entries = [
-    { path = "/System/Applications/Safari.app/"; }
+    { path = "/Applications/Safari.app/"; }
     { path = "/Applications/Slack.app/"; }
     { path = "/System/Applications/Messages.app/"; }
     { path = "/System/Applications/Facetime.app/"; }
@@ -80,7 +80,7 @@ in
       options = "--sort name --view grid --display folder";
     }
     {
-      path = "${config.users.users.${user}.home}/.local/share/downloads";
+      path = "${config.users.users.${user}.home}/Downloads";
       section = "others";
       options = "--sort name --view grid --display stack";
     }
