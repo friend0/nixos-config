@@ -14,6 +14,7 @@ with pkgs; [
   neofetch
   openssh
   sqlite
+  stow
   wget
   zip
 
