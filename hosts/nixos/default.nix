@@ -1,11 +1,14 @@
 { config, inputs, pkgs, ... }:
 
 let user = "m0";
-    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; in
+    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOX0JKMkJFmu7BbFMvE4xNFBelG+OJ8M9qMLCvRlGXKr friend0" ]; 
+in
 {
   imports = [
     ../../modules/nixos/disk-config.nix
+    ../../modules/nixos/vmware-guest.nix
     ../../modules/shared
+    
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -25,7 +28,7 @@ let user = "m0";
   };
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Los_Angeles";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
