@@ -112,7 +112,10 @@ in
     };
 
     # Let's be able to SSH into this machine
-    openssh.enable = true;
+    # openssh.enable = true;
+    services.openssh = {
+      enable = true;
+    };
 
     # Sync state between machines
     syncthing = {
