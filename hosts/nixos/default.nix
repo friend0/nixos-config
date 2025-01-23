@@ -87,11 +87,6 @@ in
         defaultSession = "i3";
         gdm = {
           enable = true;
-          # extraConfig = ''
-          #     [org/gnome/desktop/background]
-          #     picture-uri='file://../../modules/nixos/config/login-wallpaper.png'
-          #     picture-options='zoom'
-          #   '';
         };
       };
 
@@ -106,9 +101,9 @@ in
         enable = true;
       };
 
-      # Turn Caps Lock into Ctrl
-      layout = "us";
-      xkbOptions = "ctrl:nocaps";
+      # # Turn Caps Lock into Ctrl
+      # layout = "us";
+      # xkbOptions = "ctrl:nocaps";
 
       # Better support for general peripherals
       libinput.enable = true;
