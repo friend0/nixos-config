@@ -84,7 +84,7 @@ in
       # '';
 
       displayManager = {
-        defaultSession = "i3";
+        defaultSession = "none+i3";
         gdm = {
           enable = true;
         };
