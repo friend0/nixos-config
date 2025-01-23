@@ -107,6 +107,7 @@ in
 
       # Better support for general peripherals
       libinput.enable = true;
+      };
 
     };
 
