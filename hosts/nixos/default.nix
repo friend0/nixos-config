@@ -87,11 +87,11 @@ in
         defaultSession = "i3";
         gdm = {
           enable = true;
-          extraConfig = ''
-              [org/gnome/desktop/background]
-              picture-uri='file://../../modules/nixos/config/login-wallpaper.png'
-              picture-options='zoom'
-            '';
+          # extraConfig = ''
+          #     [org/gnome/desktop/background]
+          #     picture-uri='file://../../modules/nixos/config/login-wallpaper.png'
+          #     picture-options='zoom'
+          #   '';
         };
       };
 

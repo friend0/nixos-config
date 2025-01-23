@@ -68,4 +68,9 @@ with pkgs; [
   go
   gopls
 
+  # Rust
+  cargo
+  rustc
+  rust-analyzer
+  clippy
 ]
