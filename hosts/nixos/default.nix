@@ -85,7 +85,7 @@ in
 
       displayManager = {
         defaultSession = "i3";
-        gnome = {
+        gdm = {
           enable = true;
         };
       };
