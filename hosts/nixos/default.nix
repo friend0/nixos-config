@@ -84,16 +84,25 @@ in
       # '';
 
       displayManager = {
-        defaultSession = "none+bspwm";
-        lightdm = {
+        defaultSession = "i3";
+        gdm = {
           enable = true;
-          greeters.slick.enable = true;
-          background = ../../modules/nixos/config/login-wallpaper.png;
+          extraConfig = ''
+              [org/gnome/desktop/background]
+              picture-uri='file://../../modules/nixos/config/login-wallpaper.png'
+              picture-options='zoom'
+            '';
+        };
+      };
+
+      desktopManager = {
+        gnome = { 
+          enable = true;
         };
       };
 
       # Tiling window manager
-      windowManager.bspwm = {
+      windowManager.i3 = {
         enable = true;
       };
 
