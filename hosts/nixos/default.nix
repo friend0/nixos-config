@@ -1,6 +1,6 @@
 { config, inputs, pkgs, ... }:
 
-let user = "%USER%";
+let user = "m0";
     keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOX0JKMkJFmu7BbFMvE4xNFBelG+OJ8M9qMLCvRlGXKr friend0" ]; 
 in
 {

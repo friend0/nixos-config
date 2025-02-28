@@ -14,10 +14,10 @@ _:
   "zoom"
 
   # Utility Tools
+  "coolterm"
   "syncthing"
   "rectangle"
   "logi-options+"
-  "coolterm"
   "chatgpt"
   "karabiner-elements"
 
@@ -26,7 +26,7 @@ _:
   "steam"
 
   # Productivity Tools
-  "raycast"
+  "nikitabobko/tap/aerospace"
 
   # Browsers
   "google-chrome"

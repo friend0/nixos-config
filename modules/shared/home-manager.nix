@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
-let name = "%NAME%";
-    user = "%USER%";
-    email = "%EMAIL%";
+let name = "Ryan Rodriguez";
+    user = "m0";
+    email = "ryan.and.rodriguez@gmail.com";
 
   tpm = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "tpm";
