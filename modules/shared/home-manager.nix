@@ -54,6 +54,7 @@ in
       
       alias nvim='NVIM_APPNAME=lzvim nvim' # LazyVim
       eval "$(starship init zsh)"
+      eval "$(zoxide init zsh)"
     '';
   };
 
@@ -335,6 +336,26 @@ in
       bind-key -T copy-mode-vi 'C-\' select-pane -l
 
       run-shell "~/.config/tmux/plugins/tmux-powerline/main.tmux"
+
+      # Sesh
+      bind-key "K" display-popup -E -w 40% "sesh connect \"$(
+      sesh list -i | gum filter --limit 1 --no-sort --fuzzy --placeholder 'Pick a sesh' --height 50 --prompt='⚡'
+      )\""
+
+      bind-key "T" run-shell "sesh connect \"$(
+        sesh list --icons | fzf-tmux -p 80%,70% \
+          --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+          --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+          --bind 'tab:down,btab:up' \
+          --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+          --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+          --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+          --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+          --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+          --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+          --preview-window 'right:55%' \
+          --preview 'sesh preview {}'
+      )\""
       '';
   };
 

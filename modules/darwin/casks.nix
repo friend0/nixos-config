@@ -26,7 +26,6 @@ _:
   "steam"
 
   # Productivity Tools
-  "nikitabobko/tap/aerospace"
 
   # Browsers
   "google-chrome"

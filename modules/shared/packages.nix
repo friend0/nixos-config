@@ -40,8 +40,9 @@ with pkgs; [
 
   # Node.js development tools
   nodePackages.npm # globally install npm
-  nodePackages.prettier
-  nodejs
+  # nodePackages.claude-code
+  # nodePackages.prettier
+  # nodejs
 
   # Text and terminal utilities
   fzf
@@ -59,18 +60,23 @@ with pkgs; [
   unzip
   vimPlugins.LazyVim
   zsh-powerlevel10k
+  sesh
+  gum
+  zoxide
 
   # Python packages
   python312
-  python312Packages.virtualenv # globally install virtualenv
+  python312Packages.virtualenv
+  python312Packages.pip
   
   # Go
   go
   gopls
 
   # Rust
-  cargo
-  rustc
-  rust-analyzer
-  clippy
+  rustup
+
+  # Protobuf
+  buf
+
 ]

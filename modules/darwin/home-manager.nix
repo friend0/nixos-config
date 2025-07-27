@@ -71,18 +71,11 @@ in
   local.dock.entries = [
     { path = "/Applications/Safari.app/"; }
     { path = "/Applications/Slack.app/"; }
-    { path = "/System/Applications/Messages.app/"; }
-    { path = "/System/Applications/Facetime.app/"; }
     { path = "/Applications/Kitty.app/"; }
-    {
-      path = "${config.users.users.${user}.home}/.local/share/";
-      section = "others";
-      options = "--sort name --view grid --display folder";
-    }
     {
       path = "${config.users.users.${user}.home}/Downloads";
       section = "others";
-      options = "--sort name --view grid --display stack";
+      options = "--sort name --view list --display stack";
     }
   ];
 
