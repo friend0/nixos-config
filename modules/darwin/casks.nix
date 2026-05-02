@@ -2,7 +2,7 @@ _:
 
 [
   # Development Tools
-  "homebrew/cask/docker"
+  # "homebrew/cask/docker"
   "visual-studio-code"
   "kitty"
   "wezterm"
@@ -15,7 +15,7 @@ _:
 
   # Utility Tools
   "coolterm"
-  "syncthing"
+  # "syncthing"
   "rectangle"
   "logi-options+"
   "chatgpt"

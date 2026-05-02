@@ -8,6 +8,7 @@ with pkgs; [
   bat
   btop
   coreutils
+  devenv
   direnv
   killall
   lazygit
@@ -35,14 +36,11 @@ with pkgs; [
   font-awesome
   hack-font
   noto-fonts
-  noto-fonts-emoji
+  noto-fonts-color-emoji
   meslo-lgs-nf
 
   # Node.js development tools
   nodePackages.npm # globally install npm
-  # nodePackages.claude-code
-  # nodePackages.prettier
-  # nodejs
 
   # Text and terminal utilities
   fzf
@@ -63,6 +61,8 @@ with pkgs; [
   sesh
   gum
   zoxide
+  vivid
+  eza
 
   # Python packages
   python312
@@ -78,5 +78,6 @@ with pkgs; [
 
   # Protobuf
   buf
+
 
 ]

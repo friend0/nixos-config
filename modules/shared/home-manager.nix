@@ -26,7 +26,7 @@ in
       # pkgs.zsh-autosuggestions
       # pkgs.zoxide
     ];
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
@@ -40,6 +40,14 @@ in
       # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
 
+      # FZF colors (sonokai theme)
+      export FZF_DEFAULT_OPTS="
+        --color=bg+:#3a3e4e,bg:#2b2d3a,spinner:#f89860,hl:#fb617e
+        --color=fg:#e1e3e4,header:#fb617e,info:#bb97ee,pointer:#f89860
+        --color=marker:#9ed06c,fg+:#e1e3e4,prompt:#bb97ee,hl+:#fb617e
+        --color=border:#7e8294
+      "
+
       # nix shortcuts
       shell() {
           nix-shell '<nixpkgs>' -A "$1"
@@ -50,8 +58,10 @@ in
 
       # Always color ls and group directories
       alias ls='ls --color=auto'
-      
-      
+
+      # Set LS_COLORS using vivid (for sesh, fzf previews, etc.)
+      export LS_COLORS="$(vivid generate snazzy)"
+
       alias nvim='NVIM_APPNAME=lzvim nvim' # LazyVim
       eval "$(starship init zsh)"
       eval "$(zoxide init zsh)"
@@ -206,7 +216,7 @@ in
       name = "Menlo";
       size = 14;
     };
-    themeFile = "Catppuccin-Macchiato";
+    extraConfig = builtins.readFile ./config/kitty/.config/kitty/current-theme.conf;
     # opacity = "0.9";
   };
 
@@ -262,14 +272,23 @@ in
         '';
       }
     ];
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     prefix = "C-space";
     escapeTime = 10;
     historyLimit = 50000;
     extraConfig = ''
+
+      # Enable true color support
+      set -as terminal-features ",xterm-256color:RGB"
+      set -as terminal-features ",tmux-256color:RGB"
+      set -as terminal-features ",xterm-kitty:RGB"
+      set -ga terminal-overrides ",xterm-256color:Tc"
+      set -ga terminal-overrides ",xterm-kitty:Tc"
+      set -g default-terminal "tmux-256color"
+
       # Default shell
-      set -gu default-command
       set -g default-shell "$SHELL"
+      set -g default-command "$SHELL"
       set -g @plugin 'tmux-plugins/tpm'
 
       # Remove Vim mode delays
@@ -339,10 +358,10 @@ in
 
       # Sesh
       bind-key "K" display-popup -E -w 40% "sesh connect \"$(
-      sesh list -i | gum filter --limit 1 --no-sort --fuzzy --placeholder 'Pick a sesh' --height 50 --prompt='⚡'
+        sesh list -i | gum filter --limit 1 --placeholder 'Pick a sesh' --no-strip-ansi --prompt='⚡'
       )\""
 
-      bind-key "T" run-shell "sesh connect \"$(
+      bind-key "S" run-shell "sesh connect \"$(
         sesh list --icons | fzf-tmux -p 80%,70% \
           --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
           --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
